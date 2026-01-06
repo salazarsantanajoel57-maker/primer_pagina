@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Blog de Joel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<header id="inicio">
+    <h1>Mi nombre es Joel Salazar Santana</h1>
+    <h2>Soy estudiante de Ing. en Sistemas Computacionales</h2>
+    <h2>Actualmente estudio en la Universidad Mexiquense del Bicentenario</h2>
+
+    <img src="img/portada.jpeg" width="150" class="foto-rectangular">
+
+    <button onclick="mostrarGustos()" class="btn-centro">Siguiente</button>
+</header>
+
+
+<section id="gustos" style="display:none;">
+    <h1>En este blog hablaré sobre mis gustos explicados en imágenes</h1>
+
+    <div class="galeria">
+        <img src="img/imagen1.png">
+        <img src="img/imagen2.jpeg">
+        <img src="img/imagen3.jpeg">
+        <img src="img/imagen4.jpeg">
+        <img src="img/imagen5.jpeg">
+        <img src="img/imagen6.jpeg">
+    </div>
+
+    <button onclick="mostrarMusica()" class="btn-centro">Ir a Música 🎵</button>
+    <button onclick="volverInicio()" class="btn-centro">Volver</button>
+</section>
+
+
+<section id="musica" style="display:none;">
+    <h1>Mis gustos musicales influyen en mi día a día</h1>
+    <h2>Les dejo unas de las canciones que suelo escuchar</h2>
+
+    <label for="listaCanciones"><strong>Elige una canción:</strong></label><br><br>
+
+    <select id="listaCanciones">
+
+        <option value="">-- Selecciona una canción --</option>
+        <option value="music/cancion1.unknown">Canción 1</option>
+        <option value="music/cancion2.mpeg">Canción 2</option>
+        <option value="music/cancion3.mpeg">Canción 3</option>
+    </select>
+
+    <p><strong>Reproduciendo:</strong> <span id="cancion-actual">Ninguna</span></p>
+
+    <button onclick="playPause()" id="btnPlay" class="btn-centro">
+        ▶️ Reproducir
+    </button>
+
+    <button onclick="volverGustos()" class="btn-centro">Volver</button>
+
+    <audio id="music" preload="metadata"></audio>
+</section>
+
+
+<script>
+function mostrarGustos() {
+    document.getElementById("inicio").style.display = "none";
+    document.getElementById("gustos").style.display = "block";
+}
+
+function volverInicio() {
+    document.getElementById("gustos").style.display = "none";
+    document.getElementById("inicio").style.display = "block";
+}
+
+function mostrarMusica() {
+    document.getElementById("gustos").style.display = "none";
+    document.getElementById("musica").style.display = "block";
+}
+
+function volverGustos() {
+    document.getElementById("musica").style.display = "none";
+    document.getElementById("gustos").style.display = "block";
+
+    const audio = document.getElementById("music");
+    audio.pause();
+    audio.currentTime = 0;
+
+    document.getElementById("btnPlay").textContent = "▶️ Reproducir";
+    document.getElementById("cancion-actual").textContent = "Ninguna";
+}
+
+function playPause() {
+    const audio = document.getElementById("music");
+    const select = document.getElementById("listaCanciones");
+    const texto = document.getElementById("cancion-actual");
+    const boton = document.getElementById("btnPlay");
+
+    if (select.value === "") {
+        alert("Primero selecciona una canción");
+        return;
+    }
+
+    if (!audio.src) {
+        audio.src = select.value;
+        texto.textContent = select.options[select.selectedIndex].text;
+    }
+
+    if (audio.paused) {
+        audio.play();
+        boton.textContent = "⏸️ Pausar";
+    } else {
+        audio.pause();
+        boton.textContent = "▶️ Reproducir";
+    }
+}
+</script>
+
+</body>
+</html>
