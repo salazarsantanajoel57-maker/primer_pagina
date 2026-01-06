@@ -1,0 +1,1 @@
+soy estudiante de la Universidad Mexiquense del Bicentenario y estudio la carrera de Ingenieria en Sistemas Computacionakes y hoy les presento un pequeño blog sobre mis gustos y todo lo que me gusta 
